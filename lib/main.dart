@@ -25,7 +25,7 @@ class _WebViewAppState extends State<WebViewApp> {
     super.initState();
     controller = WebViewController()..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(
-        Uri.parse('https://flutter.dev'),
+        Uri.parse('http://192.168.1.207:8000'),
       );
   }
 
@@ -33,7 +33,7 @@ class _WebViewAppState extends State<WebViewApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter WebView'),
+        backgroundColor: Colors.white
       ),
       body: WebViewWidget(controller: controller ),
     );
