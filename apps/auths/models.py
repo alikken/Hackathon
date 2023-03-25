@@ -22,49 +22,66 @@ from abstracts.models import AbstractModel
 # from abstracts import utils
 
 
-# class CustomUserManager(BaseUserManager):
-#     """ClientManager."""
+class CustomUserManager(BaseUserManager):
+    """ClientManager."""
 
-#     def create_user(
-#         self,
-#         email: str,
-#         password: str
-#     ) -> 'CustomUser':
+    def create_user(
+        self,
+        username,
+        phone_number,
+        password: str,
+        is_superuser = False
+    ) -> 'CustomUser':
+        if is_superuser == False:
+            custom_user: 'CustomUser' = self.model(
+                phone_number=phone_number,
+                password=password
+            )
+        else:
+            custom_user: 'CustomUser' = self.model(
+                username=username,
+                phone_number=phone_number,
+                password=password
+            )
+        custom_user.set_password(password)
+        custom_user.save(using=self._db)
+        return custom_user
         
-#         custom_user: 'CustomUser' = self.model(
-#             phone_number=self.phone_number,
-#             password=password
-#         )
-#         custom_user.set_password(password)
-#         custom_user.save(using=self._db)
-#         return custom_user
 
-#     def create_superuser(
-#         self,
-#         email: str,
-#         password: str
-#     ) -> 'CustomUser':
 
-#         custom_user: 'CustomUser' = self.model(
-#             email=self.normalize_email(email),
-#             password=password
-#         )
-#         custom_user.is_superuser = True
-#         custom_user.is_active = True
-#         custom_user.is_staff = True
-#         custom_user.set_password(password)
-#         custom_user.save(using=self._db)
-#         return
+    # def create_superuser(
+    #     self,
+    #     username: str,
+    #     password: str
+    # ) -> 'CustomUser':
+    #     print('==================== Ay')
+    #     custom_user: 'CustomUser' = self.model(
+    #         username=username,
+    #         password=password
+    #     )
+    #     custom_user.phone_number = '+77712345677'
+    #     custom_user.is_superuser = True
+    #     custom_user.is_active = True
+    #     custom_user.is_staff = True
+    #     custom_user.set_password(password)
+    #     custom_user.save(using=self._db)
+    #     return
+    
 
-#     def create_test_user(self) -> 'CustomUser':
+    def create_superuser(self, username, phone_number, password):
+        custom_user = self.create_user(
+            username,
+            "+77712345677",
+            password,
+            is_superuser=True
+        )
+        print('==================== Ay')
+        custom_user.is_superuser=True
+        custom_user.is_active = True
+        custom_user.is_staff = True
+        custom_user.save(using=self._db)
 
-#         custom_user: 'CustomUser' = self.model(
-#             email=self.normalize_email('root2@gmail.com'),
-#             password='qwerty'
-#         )
-#         custom_user.set_password('qwerty')
-#         custom_user.save(using=self._db)
-#         return custom_user
+        return custom_user
 
 
 class CustomUser(
@@ -79,6 +96,13 @@ class CustomUser(
         max_length=255,
         null=True,
         blank=True
+    )
+    username = models.CharField(
+        verbose_name='Никнейм',
+        max_length=255,
+        null=True,
+        blank=True,
+        unique=True
     )
     phone_regex = RegexValidator(
         regex=r'^\(?\+[0-9]{1,3}\)? ?-?[0-9]{1,3} ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?', 
@@ -101,10 +125,10 @@ class CustomUser(
         verbose_name='active',
         default=False
     )
-    USERNAME_FIELD = 'phone_number'
-    REQUIRED_FIELDS = ['full_name', 'phone_number']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['phone_number']
 
-    # objects = CustomUserManager()
+    objects = CustomUserManager()
 
     class Meta:
         ordering = ('-datetime_created',)

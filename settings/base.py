@@ -89,6 +89,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'auths.CustomUser'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'auths.auth_backend.CustomBackend',
+]
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Almaty'

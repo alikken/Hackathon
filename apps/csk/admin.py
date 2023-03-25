@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import (
+    UserCall, 
+    MasterUser,
+)
+
+
+admin.site.register(UserCall)
+admin.site.register(MasterUser)
