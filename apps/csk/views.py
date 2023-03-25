@@ -63,7 +63,7 @@ class MainView(HttpResponseMixin, View):
 #     ) -> HttpResponse:
 #         form = self.form(request.POST or None)
 #         if not form.is_valid():
-#             return HttpResponse('Bad')
+#             return HttpResponse('')
 #         print(form.cleaned_data)
 #         form.save()
 #         return HttpResponse('OK')

@@ -63,6 +63,6 @@ class LoginForm(Form):
     class Meta:
         model = CustomUser
         fields = (
-            'email',
+            'phone_number',
             'password'
         )

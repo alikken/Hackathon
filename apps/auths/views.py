@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,resolve_url
+from django.contrib.auth.views import LoginView
 from django.http import (
     HttpRequest, 
     HttpResponse
@@ -27,7 +28,7 @@ from auths.forms import (
 class RegistrationView(HttpResponseMixin, View):
     """Registration View."""
 
-    template_name = 'auths/registration.html'
+    template_name = 'auths/registation.html'
     form: ModelFormMetaclass = RegistrationForm
 
     def get(
@@ -56,75 +57,76 @@ class RegistrationView(HttpResponseMixin, View):
         if not form.is_valid():
             return HttpResponse("BAD")
 
-        custom_user: CustomUser = form.save(
-            commit=False
-        )
-        custom_user.password =\
-            make_password(custom_user.password)
-
+        custom_user: CustomUser = form.save(commit=False)
+        custom_user.username = form.cleaned_data['phone_number']
+        custom_user.password = make_password(custom_user.password)
         custom_user.save()
         return HttpResponse("OK")
 
+class LoginViewa(LoginView):
+    template_name='auths/login.html'
+    def get_success_url(self):
+        return resolve_url('/')
+# class LoginView(HttpResponseMixin, View):
+#     """Login View."""
 
-class LoginView(HttpResponseMixin, View):
-    """Login View."""
+#     template_name: str = 'auths/login.html'
+    # form: ModelFormMetaclass = LoginForm
 
-    template_name: str = 'auths/login.html'
-    form: ModelFormMetaclass = LoginForm
+    # def get(
+    #     self,
+    #     request: WSGIRequest,
+    #     *args: tuple,
+    #     **kwargs: dict,
+    # ) -> HttpResponse:
+    #     return self.get_http_response(
+    #         request=request,
+    #         template_name=self.template_name,
+    #         context={
+    #             'ctx_title' : 'Login',
+    #             'ctx_form' : self.form()
+    #         }
+    #     )
 
-    def get(
-        self,
-        request: WSGIRequest,
-        *args: tuple,
-        **kwargs: dict,
-    ) -> HttpResponse:
-        return self.get_http_response(
-            request=request,
-            template_name=self.template_name,
-            context={
-                'ctx_title' : 'Login',
-                'ctx_form' : self.form()
-            }
-        )
+#     def post(
+#          self,
+#         request: WSGIRequest,
+#         *args: tuple,
+#         **kwargs: dict,
+#     ) -> HttpResponse:
+#         form: LoginForm = self.form(
+#             request.POST
+#         )
+#         if not form.is_valid():
+#             return self.get_http_response(
+#                 request=request,
+#                 template_name=self.template_name,
+#                 context={
+#                     'ctx_title' : 'Login',
+#                     'ctx_form' : self.form()
+#                 }
+#             )
 
-    def post(
-         self,
-        request: WSGIRequest,
-        *args: tuple,
-        **kwargs: dict,
-    ) -> HttpResponse:
-        form: LoginForm = self.form(
-            request.POST
-        )
-        if not form.is_valid():
-            return self.get_http_response(
-                request=request,
-                template_name=self.template_name,
-                context={
-                    'ctx_title' : 'Login',
-                    'ctx_form' : self.form()
-                }
-            )
+#         phone_number = form.cleaned_data['phone_number']
+#         password = form.cleaned_data['password']
+#         user: CustomUser = authenticate(
+#             phone_number=phone_number,
+#             # username=phone_number,
+#             password=password
+#         )
+#         if not user:
+#             return self.get_http_response(
+#                 request=request,
+#                 template_name=self.template_name,
+#                 context={
+#                     'ctx_title' : 'Error',
+#                     'ctx_form' : self.form()
+#                 }
+#             )
 
-        email = form.cleaned_data['email']
-        password = form.cleaned_data['password']
-        user: CustomUser = authenticate(
-            username=email,
-            password=password
-        )
-        if not user:
-            return self.get_http_response(
-                request=request,
-                template_name=self.template_name,
-                context={
-                    'ctx_title' : 'Error',
-                    'ctx_form' : self.form()
-                }
-            )
+#         login(request, user)
 
-        login(request, user)
-
-        return redirect('/')
+#         return redirect('/')
 
 
 class LogoutView(HttpResponseMixin, View):

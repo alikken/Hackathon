@@ -121,7 +121,7 @@ class CustomUser(
         default=True
     )
     is_staff = models.BooleanField(
-        verbose_name='active',
+        verbose_name='staff',
         default=False
     )
     USERNAME_FIELD = 'username'
@@ -137,6 +137,8 @@ class CustomUser(
     def save(self, *args: tuple, **kwargs: dict) -> None:
         self.full_clean()
         return super().save(*args, **kwargs)
+    def __str__(self):
+        return str(self.phone_number)
     
 
 
