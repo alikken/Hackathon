@@ -20,14 +20,11 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 # Local
 from .models import (
     UserCall,
-    AdminCall,
 )
 from abstracts.mixins import HttpResponseMixin
-from abstracts import utils
-from .forms import (
-    UserCallForm,
-    AdminCallForm
-)
+# from .forms import (
+#     UserCallForm,
+# )
 
 
 class MainView(HttpResponseMixin, View):
@@ -37,36 +34,36 @@ class MainView(HttpResponseMixin, View):
 
         return self.get_http_response(
             request=request,
-            template_name='csk/home_page.html',
+            template_name='home_page.html',
             context={
                 'ctx_user': request.user
             }
         )
     
 
-class UserCallView(HttpResponseMixin, View):
-    """View for UserCall."""
+# class UserCallView(HttpResponseMixin, View):
+#     """View for UserCall."""
 
-    form = UserCallForm
+#     form = UserCallForm
 
-    def get(self, request: HttpRequest, *args: tuple, **kwargs: dict):
-        return self.get_http_response(
-            request=request,
-            template_name='.html',
-            context={
-                'ctx_form' : self.form()
-            }
-        )
+#     def get(self, request: HttpRequest, *args: tuple, **kwargs: dict):
+#         return self.get_http_response(
+#             request=request,
+#             template_name='.html',
+#             context={
+#                 'ctx_form' : self.form()
+#             }
+#         )
 
-    def post(
-        self, 
-        request: HttpRequest,
-        *args: tuple, 
-        **kwargs: dict
-    ) -> HttpResponse:
-        form = self.form(request.POST or None)
-        if not form.is_valid():
-            return HttpResponse('Bad')
-        print(form.cleaned_data)
-        form.save()
-        return HttpResponse('OK')
+#     def post(
+#         self, 
+#         request: HttpRequest,
+#         *args: tuple, 
+#         **kwargs: dict
+#     ) -> HttpResponse:
+#         form = self.form(request.POST or None)
+#         if not form.is_valid():
+#             return HttpResponse('Bad')
+#         print(form.cleaned_data)
+#         form.save()
+#         return HttpResponse('OK')

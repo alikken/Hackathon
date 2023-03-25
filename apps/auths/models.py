@@ -19,7 +19,6 @@ from django.core.validators import RegexValidator
 
 # Local
 from abstracts.models import AbstractModel
-# from abstracts import utils
 
 
 class CustomUserManager(BaseUserManager):
