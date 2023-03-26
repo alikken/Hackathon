@@ -22,6 +22,9 @@ from django.views.generic.edit import UpdateView
 
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
+from auths.models import CustomUser
+
+
 # Local
 from .models import (
     UserCall,
@@ -128,5 +131,15 @@ def adminpage(request):
 def dashbord(request):
     return render(request, 'dashbord/dashbord_main.html')
 
-def profile(request):
-    return render(request, "profile_user/profile.html")
+# def profile(request):
+#     return render(request, "profile_user/profile.html")
+
+
+
+def profile(request,user_ptr_id):
+    customer=CustomUser.objects.get(id=user_ptr_id)
+    # orders = customer.order_set.all()
+    users_call = customer.usercall_set.all()
+
+    context = {"ctx_user":customer, "orders":users_call,}
+    return render(request,'profile_user/profile.html', context )

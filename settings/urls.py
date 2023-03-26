@@ -31,7 +31,8 @@ urlpatterns = [
     path("callform/",UserCallView.as_view() ),
     # path("callform/",UserCallView),
     path("home/", dashbord),
-    path("profile/", profile)
+    # path("profile/", profile),
+    path("profile/<str:user_ptr_id>/", profile, name='profile'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

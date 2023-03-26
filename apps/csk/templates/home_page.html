@@ -28,6 +28,15 @@
             </li>
           </ul>
         {% endif %}
+        {% if user.is_active%}
+        {% for ctx in ctx_user %}
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'ctx'ctx.id %}">Профиль<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        {% endfor %}
+        {% endif %}
 
       
       <ul class="navbar-nav mr-auto">
