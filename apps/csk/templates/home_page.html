@@ -21,7 +21,7 @@
         </ul>
       </div>
       {% if user.is_authenticated %}
-        {% if user.is_staff %}
+        {% if user.is_superuser %}
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="/adminpage/">Админка<span class="sr-only">(current)</span></a>
@@ -29,13 +29,17 @@
           </ul>
         {% endif %}
         {% if user.is_active%}
-        {% for ctx in ctx_user %}
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'ctx'ctx.id %}">Профиль<span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-        {% endfor %}
+          
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              {% if user.is_staff%}
+              <a class="nav-link" href="{% url 'master' request.user.id %}">Профиль</a>
+              {% else %}
+              <a class="nav-link" href="{% url 'customer' request.user.id %}">Профиль</a>
+              {% endif %}
+            </li>
+          </ul>
+          
         {% endif %}
 
       

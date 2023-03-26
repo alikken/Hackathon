@@ -36,23 +36,31 @@ from .forms import (
     UserCallForm2
 )
 from abstracts.mixins import HttpResponseMixin
-# from .forms import (
-#     UserCallForm,
-# )
+from .forms import (
+    UserCallForm,
+)
 
+def MainView(request:HttpRequest):
+    # orders=Order.objects.all()
+    customers=CustomUser.objects.all()
+    masters=MasterUser.objects.all()
+    context={"ctx_user":request.user,"customers":customers,"masters":masters,}
+    return render(request,'home_page.html', context )
+# class MainView(HttpResponseMixin, View):
+#     """Main view."""
 
-class MainView(HttpResponseMixin, View):
-    """Main view."""
-
-    def get(self, request: HttpRequest, *args, **kwargs):
-
-        return self.get_http_response(
-            request=request,
-            template_name='home_page.html',
-            context={
-                'ctx_user': request.user
-            }
-        )
+#     def get(self, request: HttpRequest, *args, **kwargs):
+#         customers=CustomUser.objects.all(),
+#         print("dddddddddddddddddddddddddd",customers)
+#         return render(
+            
+#             request=request,
+#             template_name='home_page.html',
+#             context={
+                
+#                 'ctx_user': request.user
+#             }
+#         )
     
 # @login_required
 # def UserCallView(request):
@@ -135,11 +143,27 @@ def dashbord(request):
 #     return render(request, "profile_user/profile.html")
 
 
+# def profile(request):
+    # customer=CustomUser.objects.get(id=user_ptr_id)
+    # orders = customer.order_set.all()
+    # users_call = customer.usercall_set.all()
 
+    # context = {"customer":customer, "orders":users_call,}
+    # return render(request,'profile_user/profile.html')
+    caller = CustomUser.objects.get(id=form['caller'].value())
 def profile(request,user_ptr_id):
     customer=CustomUser.objects.get(id=user_ptr_id)
     # orders = customer.order_set.all()
     users_call = customer.usercall_set.all()
 
-    context = {"ctx_user":customer, "orders":users_call,}
+    context = {"customer":customer, "orders":users_call,}
     return render(request,'profile_user/profile.html', context )
+
+
+def profile_master(request,user_ptr_id):
+    customer=MasterUser.objects.get(id=user_ptr_id)
+    # orders = customer.order_set.all()
+    users_call = UserCall.objects.filter(master_id=customer)
+
+    context = {"master":customer, "users_call":users_call,}
+    return render(request,'profile_user/profile_master.html', context )

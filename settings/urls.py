@@ -9,7 +9,8 @@ from csk.views import (
     AdminCallView,
     adminpage,
     dashbord,
-    profile
+    profile,
+    profile_master,
     
 )
 from auths.views import (
@@ -21,7 +22,7 @@ from auths.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', MainView.as_view()),
+    path('', MainView,),
     path("reg/",RegistrationView.as_view()),
     path("login/",LoginViewa.as_view() ),
     path("logout/",LogoutView.as_view() ),
@@ -32,7 +33,8 @@ urlpatterns = [
     # path("callform/",UserCallView),
     path("home/", dashbord),
     # path("profile/", profile),
-    path("profile/<str:user_ptr_id>/", profile, name='profile'),
+    path("customer/<str:user_ptr_id>/", profile, name='customer'),
+    path("master/<str:user_ptr_id>/", profile_master, name='master'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
