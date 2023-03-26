@@ -1,0 +1,25 @@
+{% extends 'home_page.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card card-body">
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="{{ ctx_form.personal_account.id_for_label }}">Personal Account</label>
+            <input type="tel" class="form-control" id="{{ ctx_form.personal_account.id_for_label }}" name="{{ ctx_form.personal_account.name }}" value="{{ form.personal_account.value }}" pattern="\d+" required>
+          </div>
+          <div class="form-group">
+            <label for="{{ ctx_form.problem.id_for_label }}">Problem</label>
+            <textarea class="form-control" id="{{ ctx_form.problem.id_for_label }}" name="{{ ctx_form.problem.name }}" rows="3" required>{{ form.problem.value }}</textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/static/js/phone_number_val.js" defer></script>
+{% endblock %}

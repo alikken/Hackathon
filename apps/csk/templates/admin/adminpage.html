@@ -1,0 +1,64 @@
+{%  extends 'home_page.html' %}
+{% comment %} {% block title %} {% endblock  %} {% endcomment %}
+{% block content %}
+
+<br>
+{% comment %}
+<div class="row">
+    <div class="col-md-5">
+        <h5>ГОСТИ</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn-primary btn-sm btn-blcok"  href="">Создать гостя</a>
+            <table>
+                <tr>
+                    <th>Гость</th>
+                    <th>Номер</th>
+                    <td>Открыть</td>
+                </tr>
+
+                {% for callform in customers %}
+                    <tr>
+                        <td> {{callform.username}} </td>
+                        <td>{{callform.phone_number}}</td>
+                        <!-- <td><a href="{% url 'customer' customer.id %}">Открыть</a></td> -->
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endcomment %}
+
+    <div class="col-md-7">
+        <h5>Последние 5 заказов</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn-primary btn-sm btn-blcok"  href="#">Создать услугу</a>
+            <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Лицевой счёт</th>
+                    <th>Номер</th>
+                    <th>Проблема</th>
+                    <th>Обновить</th>
+                    <th>Удалить</th>
+                </tr>
+                {% for callform in callforms %}
+                    <tr>
+                        <td>{{callform.personal_account}}</td>
+                        <td> {{callform.caller}} </td>
+                        <td> {{callform.problem}}</td>
+                       
+                        <td><a href="/usercalls/edit/{{callform.id}}">Обновить</a></td>
+                        <td><a href="#">Удалить</a></td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+{% endblock content %}

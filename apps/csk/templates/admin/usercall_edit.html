@@ -1,0 +1,45 @@
+{%  extends 'home_page.html' %}
+{% comment %} {% block title %} {% endblock  %} {% endcomment %}
+{% block content %}
+{% load widget_tweaks %}
+
+
+    <div class="col-md-7">
+        <h5>Последние 5 заказов</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn-primary btn-sm btn-blcok"  href="#">Создать услугу</a>
+            <form method="POST">
+                <br>
+                {%csrf_token%}
+                {% for field in form.visible_fields %}
+                    {% if field.name == "caller" %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <input type="text" readonly value="{{ object.caller.full_name }}">
+
+                            <input type="hidden" value="{{ object.caller.id }}" name="caller">
+
+                            {% for error in field.errors %}
+                            <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    
+                    {% else %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {% render_field field class="form-control" placeholder=field.label %}
+                            {% for error in field.errors %}
+                            <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <p> <input type="submit" value="Передать мастеру"> </p>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

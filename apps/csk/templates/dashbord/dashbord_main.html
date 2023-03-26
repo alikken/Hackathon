@@ -1,0 +1,253 @@
+{% extends 'home_page.html' %}
+
+{%block content%}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card card-hover">
+                <div class="box bg-info text-center">
+                  <h1 class="font-light text-white">
+                    <i class="mdi mdi-view-dashboard"></i>
+                  </h1>
+                  <h6 class="text-white">Мастера<br>9999</h6>
+                </div>
+              </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card card-hover">
+                <div class="box bg-success text-center">
+                  <h1 class="font-light text-white">
+                    <i class="mdi mdi-chart-areaspline"></i>
+                  </h1>
+                  <h6 class="text-white">Выполненно заказов<br>9999</h6>
+                </div>
+              </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card card-hover">
+                <div class="box bg-warning text-center">
+                  <h1 class="font-light text-white">
+                    <i class="mdi mdi-collage"></i>
+                  </h1>
+                  <h6 class="text-white">Собранно денег<br>Месяц<br>9999 тг</h6>
+                </div>
+              </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card card-hover">
+                <div class="box bg-danger text-center">
+                  <h1 class="font-light text-white">
+                    <i class="mdi mdi-border-outside"></i>
+                  </h1>
+                  <h6 class="text-white">Call-центр<br>7 777163622</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row crd-profile">
+            
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                      <h6 class="card-title text-center">Отправить запрос</h6>
+                      <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <label for="{{ form.personal_account.id_for_label }}"><h6>Personal Account</h6></label>
+                          <input type="tel" class="form-control" id="{{ form.personal_account.id_for_label }}" name="{{ form.personal_account.name }}" value="{{ form.personal_account.value }}" pattern="\d+" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="{{ form.problem.id_for_label }}"><h6>Problem</h6></label>
+                          <textarea class="form-control" id="{{ form.problem.id_for_label }}" name="{{ form.problem.name }}" rows="3" required>{{ form.problem.value }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                      <h6 class="card-title text-center">Лучший работник</h6>
+                      {% comment %} <img src="C:\Python_project\command_project\Hackathon-feifed\apps\csk\templates\img\depositphotos_80418702-stock-photo-craftsman-cat-with-tools.jpg" class="card-img-top" alt="..."> {% endcomment %}
+                        <div class="crd-profile1">
+                            <label for=""><h6>Имя работника:</h6></label><br>
+                            <label for=""><h6>должность:</h6></label>
+                            <h6>Заслуги:<br>бабблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблабла</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=""></div>
+          <div class="row">
+            <div class="col-sm-6">
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>  
+            </div>
+            <div class="col-sm-6">
+        
+                <div class="card">
+                    <div class="card-body">
+                      <h6 class="card-title text-center mb-0">News Updates</h6>
+                    </div>
+                    <ul class="list-style-none">
+                      <li class="d-flex no-block card-body">
+                        <div>
+                          <h6>МЫ подали отопление в дом </h6>
+                          <p>бабблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблабла</p>
+                        </div>
+                        <div class="ms-auto">
+                          
+                            <h6 class="text-muted-end mb-0">20 Jan</h6 >
+                            
+                          
+                        </div>
+                      </li>
+                      
+                    </ul>
+                  </div>
+
+            </div>
+        </div>  
+          {% comment %} <script>
+            window.onload = function() {
+            
+            var chart = new CanvasJS.Chart("chartContainer", {       
+                animationEnabled: true,
+                title: {
+                    text: "Try Dragging Any Column to Resize"
+                },
+                axisX:{
+                    minimum: 5,
+                    maximum: 95
+                },
+                data: [{
+                    type: "column",
+                    dataPoints: [
+                        { x: 10, y: 71 },
+                        { x: 20, y: 55 },
+                        { x: 30, y: 50 },
+                        { x: 40, y: 65 },
+                        { x: 50, y: 95 },
+                        { x: 60, y: 68 },
+                        { x: 70, y: 28 },
+                        { x: 80, y: 34 },
+                        { x: 90, y: 14 }
+                    ]
+                }]
+            });
+            chart.render();
+            
+            var xSnapDistance = chart.axisX[0].convertPixelToValue(chart.get("dataPointWidth")) / 2;
+            var ySnapDistance = 3;
+            
+            var xValue, yValue;
+            
+            var mouseDown = false;
+            var selected = null;
+            var changeCursor = false;
+            
+            var timerId = null;
+            
+            function getPosition(e) {
+                var parentOffset = $("#chartContainer > .canvasjs-chart-container").offset();          	
+                var relX = e.pageX - parentOffset.left;
+                var relY = e.pageY - parentOffset.top;
+                xValue = Math.round(chart.axisX[0].convertPixelToValue(relX));
+                yValue = Math.round(chart.axisY[0].convertPixelToValue(relY));
+            }
+            
+            function searchDataPoint() {
+                var dps = chart.data[0].dataPoints;
+                for(var i = 0; i < dps.length; i++ ) {
+                    if( (xValue >= dps[i].x - xSnapDistance && xValue <= dps[i].x + xSnapDistance) && (yValue >= dps[i].y - ySnapDistance && yValue <= dps[i].y + ySnapDistance) ) 
+                    {
+                        if(mouseDown) {
+                            selected = i;
+                            break;
+                        } else {
+                            changeCursor = true;
+                            break; 
+                        }
+                    } else {
+                        selected = null;
+                        changeCursor = false;
+                    }
+                }
+            }
+            
+            jQuery("#chartContainer > .canvasjs-chart-container").on({
+                mousedown: function(e) {
+                    mouseDown = true;
+                    getPosition(e);  
+                    searchDataPoint();
+                },
+                mousemove: function(e) {
+                    getPosition(e);
+                    if(mouseDown) {
+                        clearTimeout(timerId);
+                        timerId = setTimeout(function(){
+                            if(selected != null) {
+                                chart.data[0].dataPoints[selected].y = yValue;
+                                chart.render();
+                            }   
+                        }, 0);
+                    }
+                    else {
+                        searchDataPoint();
+                        if(changeCursor) {
+                            chart.data[0].set("cursor", "n-resize");
+                        } else {
+                            chart.data[0].set("cursor", "default");
+                        }
+                    }
+                },
+                mouseup: function(e) {
+                    if(selected != null) {
+                        chart.data[0].dataPoints[selected].y = yValue;
+                        chart.render();
+                        mouseDown = false;
+                    }
+                }
+            });
+            
+            }
+        </script> {% endcomment %}
+
+        
+
+
+
+
+    </div>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>  
+    <script src="/static/js/graf.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css?v=1" />
+    
+
+
+</body>
+</html>
+
+
+
+
+{%endblock%}
