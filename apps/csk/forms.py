@@ -43,3 +43,9 @@ class UserCallForm2(forms.ModelForm):
             'problem': forms.Textarea(attrs={'id': 'problem', 'class': 'form-control'}),
         }
 
+class MasterUpdateForm(forms.ModelForm):
+    """"""
+
+    class Metf:
+        model = UserCall
+        fields = ('status',)

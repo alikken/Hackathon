@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-sm-8 status">
                         <div class="text-left">
-                            <h6>Статус заявки</h6>
+                            <h6>Контакты {{master.phone_number}}</h6>
                         </div>
                     </div>
                 
@@ -25,24 +25,23 @@
                 <hr>
                 <div></div>
                 <div class="col-md-7">
-                    <h5>Последние 5 заказов</h5>
+                    <h5>Начначенные заказы</h5>
                     <hr>
                     <div class="card card-body">
                         {%comment%} <a class="btn-primary btn-sm btn-blcok"  href="{% url 'order_form'%}">Создать услугу</a> {%endcomment%}
                         <div class="table-responsive">
                         <table class="table">
                             <tr>
-                                <th>Услуга</th>
-                                <th>Когда</th>
+                                <th>Лицевой Счёт</th>
                                 <th>Статус</th>
-                                <th>ОБновить</th>
-                                <th>Удалить</th>
+                                <th>Тип услуги</th>
+                                
                             </tr>
-                            {% for user_call in user_calls %}
+                            {% for user_call in users_calls %}
                                 <tr>
-                                    <td> {{user_call.master_id}}</td>
+                                    <td> {{user_call.personal_account}}</td>
                                     <td> {{user_call.get_status_points_display}} </td>
-                                    
+                                    <td> {{user_call.get_service_points_display}} </td>
                                     {%comment%}<td>{{orders.status}}</td>
                                     <td><a href="{% url 'update_order' order.id %}">Обновить</a></td>
                                     <td><a href="{% url 'delete_order' order.id %}">Удалить</a></td>{%endcomment%}

@@ -31,6 +31,7 @@ from .models import (
     MasterUser
 )
 from .forms import (
+    MasterUpdateForm,
     UserCallForm,
     UserCallUpdateForm,
     UserCallForm2
@@ -167,3 +168,11 @@ def profile_master(request,user_ptr_id):
 
     context = {"master":customer, "users_calls":users_call,}
     return render(request,'profile_user/profile_master.html', context )
+class MasterUpdateView(UpdateView):
+
+    template_name = ""
+    model = UserCall
+    form_class = MasterUpdateForm
+
+    def get_success_url(self):
+        return "/"

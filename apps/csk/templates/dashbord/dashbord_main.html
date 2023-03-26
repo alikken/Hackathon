@@ -20,7 +20,7 @@
                   <h1 class="font-light text-white">
                     <i class="mdi mdi-view-dashboard"></i>
                   </h1>
-                  <h6 class="text-white">Мастера<br>9999</h6>
+                  <h6 class="text-white">Мастера<br>158</h6>
                 </div>
               </div>
             </div>
@@ -31,7 +31,7 @@
                   <h1 class="font-light text-white">
                     <i class="mdi mdi-chart-areaspline"></i>
                   </h1>
-                  <h6 class="text-white">Выполненно заказов<br>9999</h6>
+                  <h6 class="text-white">Выполненно заказов<br>478</h6>
                 </div>
               </div>
             </div>
@@ -42,7 +42,7 @@
                   <h1 class="font-light text-white">
                     <i class="mdi mdi-collage"></i>
                   </h1>
-                  <h6 class="text-white">Собранно денег<br>Месяц<br>9999 тг</h6>
+                  <h6 class="text-white">Собранно денег<br>Месяц<br>199990 тг</h6>
                 </div>
               </div>
             </div>
@@ -61,69 +61,54 @@
 
           <div class="row crd-profile">
             
+              
+          
+            
             <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                      <h6 class="card-title text-center">Отправить запрос</h6>
-                      <form method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                          <label for="{{ form.personal_account.id_for_label }}"><h6>Personal Account</h6></label>
-                          <input type="tel" class="form-control" id="{{ form.personal_account.id_for_label }}" name="{{ form.personal_account.name }}" value="{{ form.personal_account.value }}" pattern="\d+" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="{{ form.problem.id_for_label }}"><h6>Problem</h6></label>
-                          <textarea class="form-control" id="{{ form.problem.id_for_label }}" name="{{ form.problem.name }}" rows="3" required>{{ form.problem.value }}</textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                      </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                      <h6 class="card-title text-center">Лучший работник</h6>
-                      {% comment %} <img src="C:\Python_project\command_project\Hackathon-feifed\apps\csk\templates\img\depositphotos_80418702-stock-photo-craftsman-cat-with-tools.jpg" class="card-img-top" alt="..."> {% endcomment %}
-                        <div class="crd-profile1">
-                            <label for=""><h6>Имя работника:</h6></label><br>
-                            <label for=""><h6>должность:</h6></label>
-                            <h6>Заслуги:<br>бабблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблабла</h6>
+              <div class="card">
+                  <div class="card-body">
+                    <h6 class="card-title text-center mb-0"><strong>Лучший работник</strong></h6>
+                    
+                      <div class="crd-profile1">
+                          {% comment %} <label for=""><h6>Мастер: Сергей Сергеев Игоревич </h6></label><br>
+                          <label for=""><h6>должность: Сантехник</h6></label>
+                          <h6>Заслуги:<br></h6> {% endcomment %}
+                          <div class="col-12">
+                              <p class="mb-2"><strong>Мастер: </strong>Сергей Сергеев Игоревич</p>
+                              <p class="mb-2"><strong>Должность: </strong>Сантехник</p>
+                              <p class="mb-2"><strong>Заслуги: </strong><br> За прошлый год, Иван регулярно производил техническое обслуживание системы водоснабжения и канализации в доме, а также быстро и эффективно решал все проблемы, связанные с сантехникой. Он действовал быстро и компетентно, решая непредвиденные ситуации.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-6">
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>  
+        </div>
+        <div class="col-sm-6">
+    
+            <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title text-center mb-0"><strong>Новости</strong></h6>
+                  
+                    <div class="row mb-4 border-bottom pb-2">
+                        <div class="col-12">
+                            <p class="mb-2"><strong>Мы подали отопление в дом</strong></p>
+                            <p>
+                              <u>30.10.2022</u>
+                            </p>
+                            <p class="mb-2">
+                                Отопление будет работать круглосуточно, чтобы вы могли наслаждаться теплом в любое время суток. Просим обратить внимание, что первые дни работы системы могут сопровождаться некоторыми техническими проблемами, которые будут устранены в кратчайшие сроки.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class=""></div>
-          <div class="row">
-            <div class="col-sm-6">
-                <div id="chartContainer" style="height: 370px; width: 100%;"></div>  
-            </div>
-            <div class="col-sm-6">
+      </div>
+        </div>
         
-                <div class="card">
-                    <div class="card-body">
-                      <h6 class="card-title text-center mb-0">News Updates</h6>
-                    </div>
-                    <ul class="list-style-none">
-                      <li class="d-flex no-block card-body">
-                        <div>
-                          <h6>МЫ подали отопление в дом </h6>
-                          <p>бабблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблаблабла</p>
-                        </div>
-                        <div class="ms-auto">
-                          
-                            <h6 class="text-muted-end mb-0">20 Jan</h6 >
-                            
-                          
-                        </div>
-                      </li>
-                      
-                    </ul>
-                  </div>
-
-            </div>
-        </div>  
+          
           {% comment %} <script>
             window.onload = function() {
             
