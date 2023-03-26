@@ -165,5 +165,5 @@ def profile_master(request,user_ptr_id):
     # orders = customer.order_set.all()
     users_call = UserCall.objects.filter(master_id=customer)
 
-    context = {"master":customer, "users_call":users_call,}
+    context = {"master":customer, "users_calls":users_call,}
     return render(request,'profile_user/profile_master.html', context )

@@ -16,7 +16,7 @@
                         <h6>  ФИО: {{customer.full_name}} </h6>
                     </div>
                     <div class="col-sm-8 status">
-                        <div class="text-left"
+                        <div class="text-left">
                             <h6>Статус заявки</h6>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                                 <th>ОБновить</th>
                                 <th>Удалить</th>
                             </tr>
-                            {% for order in orders %}
+                            {% for order in masters %}
                                 <tr>
                                     <td> {{order.personal_account}}</td>
                                     <td> {{order.get_status_points_display}} </td>

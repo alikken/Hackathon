@@ -33,9 +33,9 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               {% if user.is_staff%}
-              <a class="nav-link" href="{% url 'master' request.user.id %}">Профиль</a>
+              <a class="nav-link" href="{% url 'master' request.user.id %}">Профиль2</a>
               {% else %}
-              <a class="nav-link" href="{% url 'customer' request.user.id %}">Профиль</a>
+              <a class="nav-link" href="{% url 'customer' request.user.id %}">Профиль1</a>
               {% endif %}
             </li>
           </ul>

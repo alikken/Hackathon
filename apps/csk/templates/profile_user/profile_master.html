@@ -11,7 +11,7 @@
 
                 <div class="row">
                     <div class="col-4 user">
-                        {{master.full_name}} 
+                        
                         <img class="rounded-circle" alt="avatar1" src="https://mdbcdn.b-cdn.net/img/new/avatars/9.webp" />
                         <h6>  ФИО: {{master.full_name}} </h6>
                     </div>
@@ -38,10 +38,10 @@
                                 <th>ОБновить</th>
                                 <th>Удалить</th>
                             </tr>
-                            {% for order in orders %}
+                            {% for user_call in user_calls %}
                                 <tr>
-                                    <td> {{order.personal_account}}</td>
-                                    <td> {{order.get_status_points_display}} </td>
+                                    <td> {{user_call.master_id}}</td>
+                                    <td> {{user_call.get_status_points_display}} </td>
                                     
                                     {%comment%}<td>{{orders.status}}</td>
                                     <td><a href="{% url 'update_order' order.id %}">Обновить</a></td>
